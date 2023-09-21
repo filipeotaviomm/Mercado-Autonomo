@@ -16,15 +16,15 @@ const app = express();
 app.use(express.json());
 
 app.get("/products", getProducts);
-app.post("/products", isRequestBodyValid, isProductNameUnique, createProduct); //Verificação de nome existente
-app.get("/products/:productId", isProductIdValid, getOneProduct); //Verificação se o id buscado existe
+app.post("/products", isRequestBodyValid, isProductNameUnique, createProduct);
+app.get("/products/:productId", isProductIdValid, getOneProduct);
 app.patch(
   "/products/:productId",
   isProductIdValid,
   isProductNameUnique,
   updatePartialProduct
-); //Verificação de nome existente / Verificação se o id buscado existe
-app.delete("/products/:productId", isProductIdValid, deleteProduct); //Verificação se o id buscado existe
+);
+app.delete("/products/:productId", isProductIdValid, deleteProduct);
 
 const PORT = 3000;
 

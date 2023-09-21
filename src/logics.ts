@@ -70,7 +70,7 @@ export const updatePartialProduct = (req: Request, res: Response) => {
     (product) => product.id === Number(req.params.productId)
   );
 
-  market.splice(index, 1, newProduct);
+  market.splice(index, 1, newProduct); //ou market[index] = newProduct
 
   return res.status(200).json(newProduct);
 };
