@@ -31,19 +31,21 @@ export const isProductIdValid = (
   next();
 };
 
-export const isRequestBodyValid = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  if (
-    !req.body.name ||
-    !req.body.price ||
-    !req.body.weight ||
-    !req.body.section ||
-    !req.body.calories
-  ) {
-    return res.status(422).json({ error: "Missing body parameters" });
-  }
-  next();
-};
+// esse middleware funciona, mas como não foi pedido, ele não passa nos testes do insomnia
+
+// export const isRequestBodyValid = (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   if (
+//     !req.body.name ||
+//     !req.body.price ||
+//     !req.body.weight ||
+//     !req.body.section ||
+//     !req.body.calories
+//   ) {
+//     return res.status(422).json({ error: "Missing body parameters" });
+//   }
+//   next();
+// };

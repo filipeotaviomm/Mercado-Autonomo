@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { market } from "./database";
 import { IProduct } from "./interfaces";
 
-export const getProducts = (req: Request, res: Response) => {
+export const getProducts = (_req: Request, res: Response) => {
   const sumProducts = market.reduce((acc, curr) => {
     return acc + curr.price;
   }, 0);
@@ -23,7 +23,7 @@ export const createProduct = (req: Request, res: Response) => {
 
   const expirationDate = calculateExpirationDate(365);
 
-  const newProduct = {
+  const newProduct: IProduct = {
     id: lastId,
     ...req.body,
     expirationDate: expirationDate,
@@ -46,8 +46,6 @@ export const updatePartialProduct = (req: Request, res: Response) => {
     (product) => product.id === Number(req.params.productId)
   );
 
-  console.log(product);
-
   let productBody: Partial<IProduct> = {};
 
   Object.entries(req.body).forEach((entry) => {
@@ -60,11 +58,11 @@ export const updatePartialProduct = (req: Request, res: Response) => {
       key === "section" ||
       key === "calories"
     ) {
-      productBody[key] = value;
+      productBody[key as keyof IProduct] = value as never;
     }
   });
 
-  const newProduct = { ...product, ...productBody };
+  const newProduct: IProduct = { ...product!, ...productBody };
 
   const index = market.findIndex(
     (product) => product.id === Number(req.params.productId)
