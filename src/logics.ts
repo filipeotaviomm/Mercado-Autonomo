@@ -81,5 +81,4 @@ export const deleteProduct = (req: Request, res: Response) => {
   market.splice(index, 1);
 
   return res.status(204).json();
-  // return res.status(204);
 };
